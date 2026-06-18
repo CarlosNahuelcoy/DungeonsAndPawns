@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB PRINCIPAL
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.MainTab.Title>Dungeons &amp; Pawns</DNP.MainTab.Title>
+  <DNP.MainTab.SessionActive>Sesión en curso.</DNP.MainTab.SessionActive>
+  <DNP.MainTab.NoSession>Sin sesión activa.</DNP.MainTab.NoSession>
+  <DNP.MainTab.OpenSession>Abrir ventana de sesión</DNP.MainTab.OpenSession>
+  <DNP.MainTab.EndSession>Terminar sesión</DNP.MainTab.EndSession>
+  <DNP.MainTab.NewSession>Nueva sesión</DNP.MainTab.NewSession>
+  <DNP.MainTab.WorldCampaign>Mundo &amp; Campaña</DNP.MainTab.WorldCampaign>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DIÁLOGO DE CONFIGURACIÓN
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Setup.Title>Nueva sesión — Dungeons &amp; Pawns</DNP.Setup.Title>
+  <DNP.Setup.SelectPlayers>SELECCIONAR JUGADORES (máx. {0})</DNP.Setup.SelectPlayers>
+  <DNP.Setup.DungeonMaster>DUNGEON MASTER</DNP.Setup.DungeonMaster>
+  <DNP.Setup.PlayerIsDM>Tú eres el DM</DNP.Setup.PlayerIsDM>
+  <DNP.Setup.ColonistIsDM>Un colono es el DM</DNP.Setup.ColonistIsDM>
+  <DNP.Setup.Ruleset>REGLAMENTO</DNP.Setup.Ruleset>
+  <DNP.Setup.Scenario>ESCENARIO (opcional)</DNP.Setup.Scenario>
+  <DNP.Setup.FreePlay>Juego libre</DNP.Setup.FreePlay>
+  <DNP.Setup.BeginSession>Comenzar sesión</DNP.Setup.BeginSession>
+  <DNP.Setup.NeedPlayer>Selecciona al menos 1 jugador.</DNP.Setup.NeedPlayer>
+  <DNP.Setup.NeedDM>Selecciona un colono como DM.</DNP.Setup.NeedDM>
+  <DNP.Setup.NeedRuleset>Selecciona un reglamento.</DNP.Setup.NeedRuleset>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENTANA DE SESIÓN — GENERAL
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Session.YouDM>Tú (DM)</DNP.Session.YouDM>
+  <DNP.Session.DMLabel>DM: {0}</DNP.Session.DMLabel>
+  <DNP.Session.EndSession>Terminar sesión</DNP.Session.EndSession>
+  <DNP.Session.EndConfirm>¿Terminar la sesión? Se aplicarán los efectos de humor.</DNP.Session.EndConfirm>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENTANA DE SESIÓN — PANEL DE PERSONAJES
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Session.Characters>PERSONAJES</DNP.Session.Characters>
+  <DNP.Session.CharLevel>{0}  —  Nv.{1}</DNP.Session.CharLevel>
+  <DNP.Session.StatLine>FUE {0}   DES {1}   MEN {2}</DNP.Session.StatLine>
+  <DNP.Session.StatusLabel>Estado: {0}</DNP.Session.StatusLabel>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENTANA DE SESIÓN — HERRAMIENTAS DEL DM
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Session.DMTools>HERRAMIENTAS DM</DNP.Session.DMTools>
+  <DNP.Session.PlayerDice>DADOS DEL JUGADOR</DNP.Session.PlayerDice>
+  <DNP.Session.DMDice>DADOS DEL DM</DNP.Session.DMDice>
+  <DNP.Session.Encounter>ENCUENTRO</DNP.Session.Encounter>
+  <DNP.Session.SessionTools>SESIÓN</DNP.Session.SessionTools>
+
+  <!-- Etiquetas de botones de dados -->
+  <DNP.Dice.PlayerD20>d20 — Acción / Ataque</DNP.Dice.PlayerD20>
+  <DNP.Dice.PlayerD12>d12 — Arma pesada</DNP.Dice.PlayerD12>
+  <DNP.Dice.PlayerD8>d8  — Arma estándar</DNP.Dice.PlayerD8>
+  <DNP.Dice.PlayerD6>d6  — Arma ligera</DNP.Dice.PlayerD6>
+  <DNP.Dice.PlayerD4>d4  — Débil / utilidad</DNP.Dice.PlayerD4>
+  <DNP.Dice.DmD20>d20 — Ataque enemigo</DNP.Dice.DmD20>
+  <DNP.Dice.DmD10>d10 — Evento aleatorio</DNP.Dice.DmD10>
+  <DNP.Dice.DmD6>d6  — Daño enemigo</DNP.Dice.DmD6>
+  <DNP.Dice.DmD4>d4  — Enemigo débil</DNP.Dice.DmD4>
+  <DNP.Dice.DismissHint>(clic para cerrar)</DNP.Dice.DismissHint>
+  <DNP.Dice.LogPlayer>[Jugador] d{0} → {1}</DNP.Dice.LogPlayer>
+  <DNP.Dice.LogDM>[DM] d{0} → {1}</DNP.Dice.LogDM>
+
+  <!-- Encuentro -->
+  <DNP.Session.StartEncounter>Iniciar encuentro</DNP.Session.StartEncounter>
+  <DNP.Session.ResolveEncounter>Resolver encuentro</DNP.Session.ResolveEncounter>
+  <DNP.Session.EncounterResolved>Encuentro resuelto.</DNP.Session.EncounterResolved>
+
+  <!-- Herramientas de sesión -->
+  <DNP.Session.AwardXP>Otorgar XP</DNP.Session.AwardXP>
+  <DNP.Session.HealParty>Curar grupo</DNP.Session.HealParty>
+  <DNP.Session.HealPartyLog>El DM restauró la vida de todo el grupo.</DNP.Session.HealPartyLog>
+  <DNP.Session.ExportSession>Exportar sesión</DNP.Session.ExportSession>
+  <DNP.Session.Narrate>Narrar</DNP.Session.Narrate>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DIÁLOGO DE ENCUENTRO
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Encounter.Title>Iniciar encuentro</DNP.Encounter.Title>
+  <DNP.Encounter.DefaultName>Nuevo encuentro</DNP.Encounter.DefaultName>
+  <DNP.Encounter.Start>Comenzar</DNP.Encounter.Start>
+  <DNP.Encounter.LogBegin>Comienza el encuentro: {0} ({1} enemigos).</DNP.Encounter.LogBegin>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DIÁLOGO DE XP
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.XP.Label>XP a otorgar a todos los jugadores:</DNP.XP.Label>
+  <DNP.XP.Award>Otorgar</DNP.XP.Award>
+  <DNP.XP.LogAwarded>Todos los jugadores recibieron {0} XP.</DNP.XP.LogAwarded>
+  <DNP.XP.LogLevelUp>{0} subió de nivel. Ahora es nivel {1}.</DNP.XP.LogLevelUp>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENTANA DE MUNDO
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.World.WindowTitle>Mundo &amp; Campaña</DNP.World.WindowTitle>
+  <DNP.World.Save>Guardar</DNP.World.Save>
+  <DNP.World.ExportJSON>Exportar JSON</DNP.World.ExportJSON>
+  <DNP.World.TabWorld>Mundo</DNP.World.TabWorld>
+  <DNP.World.TabCampaign>Campaña</DNP.World.TabCampaign>
+  <DNP.World.TabAI>Config. IA</DNP.World.TabAI>
+
+  <!-- Campos de la pestaña Mundo -->
+  <DNP.World.FieldWorldName>Nombre del mundo</DNP.World.FieldWorldName>
+  <DNP.World.FieldGenre>Género</DNP.World.FieldGenre>
+  <DNP.World.HintGenre>fantasía medieval / ciencia ficción / post-apocalíptico / terror...</DNP.World.HintGenre>
+  <DNP.World.FieldTone>Tono</DNP.World.FieldTone>
+  <DNP.World.HintTone>oscuro / heroico / humor negro / supervivencia / épico...</DNP.World.HintTone>
+  <DNP.World.FieldSummary>Resumen del mundo</DNP.World.FieldSummary>
+  <DNP.World.HintSummary>Describe el mundo en unos párrafos. Esto es lo que la IA lee para entender dónde se desarrolla la historia.</DNP.World.HintSummary>
+  <DNP.World.FieldHistory>Historia y trasfondo</DNP.World.FieldHistory>
+  <DNP.World.HintHistory>Eventos importantes del pasado, conflictos antiguos, mitos fundacionales...</DNP.World.HintHistory>
+  <DNP.World.FieldFactions>Facciones</DNP.World.FieldFactions>
+  <DNP.World.HintFactions>Grupos y sus objetivos. Ej: "El Concejo de Hierro: un gremio de mercaderes corruptos que controla las puertas de la ciudad."</DNP.World.HintFactions>
+  <DNP.World.FieldLocations>Lugares destacados</DNP.World.FieldLocations>
+  <DNP.World.HintLocations>Lugares que el grupo puede visitar. Ej: "El Archivo Hundido: una biblioteca inundada con registros de antes de la guerra."</DNP.World.HintLocations>
+  <DNP.World.FieldRules>Reglas del mundo</DNP.World.FieldRules>
+  <DNP.World.HintRules>Qué existe y qué no. Ej: "La magia está prohibida. La tecnología es pre-industrial. Los dioses existen pero guardan silencio."</DNP.World.HintRules>
+
+  <!-- Campos de la pestaña Campaña -->
+  <DNP.World.CampaignExplainer>El objetivo de campaña es la meta a largo plazo que da dirección a cada sesión. Los jugadores trabajan hacia ella a lo largo de varias sesiones. Puede ser tan simple o complejo como quieras.</DNP.World.CampaignExplainer>
+  <DNP.World.FieldCampaignName>Nombre de la campaña</DNP.World.FieldCampaignName>
+  <DNP.World.HintCampaignName>Ej: "La Noche Larga", "Proyecto Éxodo"...</DNP.World.HintCampaignName>
+  <DNP.World.FieldObjective>Objetivo de campaña</DNP.World.FieldObjective>
+  <DNP.World.HintObjective>¿Qué intentan lograr los jugadores? Esto se muestra a la IA como el objetivo general.\nEj: "Encontrar y destruir la torre de señal antes de que los saqueadores la usen para llamar refuerzos."</DNP.World.HintObjective>
+  <DNP.World.FieldDMNotes>Notas del DM (privadas)</DNP.World.FieldDMNotes>
+  <DNP.World.HintDMNotes>Tus notas de planificación privadas. NO se envían a la IA. Úsalas para planificar sesiones, tramas secretas, motivaciones de personajes...</DNP.World.HintDMNotes>
+
+  <!-- Pestaña Config. IA -->
+  <DNP.World.AIExplainer>Estas instrucciones se envían directamente a la IA narradora antes de cada respuesta. Úsalas para controlar el estilo, la longitud, restricciones de contenido o cualquier otra cosa. La IA intentará seguirlas lo más fielmente posible.</DNP.World.AIExplainer>
+  <DNP.World.AIPresets>PRESETS RÁPIDOS (clic para agregar)</DNP.World.AIPresets>
+  <DNP.World.PresetShort>Respuestas cortas</DNP.World.PresetShort>
+  <DNP.World.PresetShortText>Mantén todas las respuestas en menos de 3 oraciones. Sé conciso.</DNP.World.PresetShortText>
+  <DNP.World.PresetCinematic>Cinematográfico</DNP.World.PresetCinematic>
+  <DNP.World.PresetCinematicText>Escribe en un estilo cinematográfico y dramático. Usa descripciones vívidas de la acción y el entorno.</DNP.World.PresetCinematicText>
+  <DNP.World.PresetDark>Tono oscuro</DNP.World.PresetDark>
+  <DNP.World.PresetDarkText>Mantén un tono serio y sombrío. La muerte y el fracaso son consecuencias reales. Sin alivio cómico.</DNP.World.PresetDarkText>
+  <DNP.World.PresetNoMeta>Sin meta-comentarios</DNP.World.PresetNoMeta>
+  <DNP.World.PresetNoMetaText>Nunca rompas la cuarta pared. Nunca hagas referencia a tiradas de dados, mecánicas de juego, o al hecho de que esto es un juego.</DNP.World.PresetNoMetaText>
+  <DNP.World.PresetSpanish>Español</DNP.World.PresetSpanish>
+  <DNP.World.PresetSpanishText>Responde siempre en español. Narra en español independientemente del idioma de entrada.</DNP.World.PresetSpanishText>
+  <DNP.World.PresetClear>Limpiar</DNP.World.PresetClear>
+  <DNP.World.FieldAIInstructions>Instrucciones para la IA narradora</DNP.World.FieldAIInstructions>
+  <DNP.World.HintAIInstructions>Escribe lo que quieras aquí. Esto va directo al prompt de sistema de la IA.</DNP.World.HintAIInstructions>
+  <DNP.World.PreviewLabel>VISTA PREVIA DEL CONTEXTO COMPLETO (lo que recibirá la IA)</DNP.World.PreviewLabel>
+  <DNP.World.Saved>[D&amp;P] Mundo guardado.</DNP.World.Saved>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MENSAJES DE EXPORTACIÓN
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Export.SessionExported>[D&amp;P] Sesión exportada a:\n{0}</DNP.Export.SessionExported>
+  <DNP.Export.CharExported>[D&amp;P] Personaje exportado a:\n{0}</DNP.Export.CharExported>
+  <DNP.Export.EnemyExported>[D&amp;P] Plantilla de enemigo exportada.</DNP.Export.EnemyExported>
+  <DNP.Export.ClassExported>[D&amp;P] Plantilla de clase exportada.</DNP.Export.ClassExported>
+  <DNP.Export.WorldExported>[D&amp;P] Mundo exportado a:\n{0}</DNP.Export.WorldExported>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PENSAMIENTOS (humor post-sesión)
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Thought.GoodSession.Label>tuvo una gran sesión de rol</DNP.Thought.GoodSession.Label>
+  <DNP.Thought.GoodSession.Desc>Eso era exactamente lo que necesitaba. Buena historia, buena compañía.</DNP.Thought.GoodSession.Desc>
+  <DNP.Thought.BadSession.Label>tuvo una mala sesión de rol</DNP.Thought.BadSession.Label>
+  <DNP.Thought.BadSession.Desc>Nos eliminaron. Otra vez. Saqué un 1 en el peor momento posible.</DNP.Thought.BadSession.Desc>
+  <DNP.Thought.GrandVictory.Label>completó una aventura épica</DNP.Thought.GrandVictory.Label>
+  <DNP.Thought.GrandVictory.Desc>Lo logramos. Contra todo pronóstico, lo limpiamos todo.</DNP.Thought.GrandVictory.Desc>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HABLANTES DEL LOG
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Log.SpeakerDM>DM</DNP.Log.SpeakerDM>
+  <DNP.Log.SpeakerSystem>Sistema</DNP.Log.SpeakerSystem>
+  <DNP.Log.SpeakerDice>Dados</DNP.Log.SpeakerDice>
+  <DNP.Log.OpeningNarration>La aventura comienza...</DNP.Log.OpeningNarration>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONFIGURACIÓN — SELECTOR DE MUNDO (nuevo)
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Setup.World>MUNDO</DNP.Setup.World>
+  <DNP.Setup.NoWorlds>Aún no hay mundos creados.</DNP.Setup.NoWorlds>
+  <DNP.Setup.CreateWorld>+ Crear mundo</DNP.Setup.CreateWorld>
+  
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENTANA DE MUNDO — SELECCIÓN DE MODO (nuevo)
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.World.ChooseMode>¿Cómo quieres crear el mundo?</DNP.World.ChooseMode>
+  <DNP.World.ModeSimple>Simple</DNP.World.ModeSimple>
+  <DNP.World.ModeSimpleDesc>Solo lo esencial. Nombre, género, tono y una descripción breve. Perfecto para empezar rápido.</DNP.World.ModeSimpleDesc>
+  <DNP.World.ModeDetailed>Detallado</DNP.World.ModeDetailed>
+  <DNP.World.ModeDetailedDesc>Construcción de mundo completa. Historia, facciones, lugares, reglas y arco de campaña. Ideal para campañas largas.</DNP.World.ModeDetailedDesc>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONFIGURACIÓN — SELECTOR DE CLASE
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Setup.ClassFor>CLASE PARA {0}</DNP.Setup.ClassFor>
+  <DNP.Setup.ClassSelectPawn>← Selecciona un jugador para asignar clase</DNP.Setup.ClassSelectPawn>
+  <DNP.Setup.ClassSuggested>★ Sugerida</DNP.Setup.ClassSuggested>
+  <DNP.Setup.ClassEdit>Editar</DNP.Setup.ClassEdit>
+  <DNP.Setup.ClassNew>Nueva clase</DNP.Setup.ClassNew>
+
+  <!-- ═══════════════════════════════════════════════════════
+       EDITOR DE CLASE
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.ClassEditor.TitleNew>Nueva clase</DNP.ClassEditor.TitleNew>
+  <DNP.ClassEditor.TitleEdit>Editar: {0}</DNP.ClassEditor.TitleEdit>
+  <DNP.ClassEditor.Save>Guardar clase</DNP.ClassEditor.Save>
+  <DNP.ClassEditor.SectionIdentity>Identidad</DNP.ClassEditor.SectionIdentity>
+  <DNP.ClassEditor.SectionStats>Stats base</DNP.ClassEditor.SectionStats>
+  <DNP.ClassEditor.SectionAbilities>Habilidades</DNP.ClassEditor.SectionAbilities>
+  <DNP.ClassEditor.FieldId>ID de clase (único, sin espacios)</DNP.ClassEditor.FieldId>
+  <DNP.ClassEditor.FieldName>Nombre de clase</DNP.ClassEditor.FieldName>
+  <DNP.ClassEditor.FieldDesc>Descripción</DNP.ClassEditor.FieldDesc>
+  <DNP.ClassEditor.FieldFlavor>Texto de sabor</DNP.ClassEditor.FieldFlavor>
+  <DNP.ClassEditor.HintFlavor>Una cita breve o eslogan que aparece en la sesión.</DNP.ClassEditor.HintFlavor>
+  <DNP.ClassEditor.FieldHp>HP base</DNP.ClassEditor.FieldHp>
+  <DNP.ClassEditor.FieldHpPerLevel>HP por nivel</DNP.ClassEditor.FieldHpPerLevel>
+  <DNP.ClassEditor.PrimaryStat>Stat principal</DNP.ClassEditor.PrimaryStat>
+  <DNP.ClassEditor.LinkedSkill>Skill de RimWorld vinculado (bonus)</DNP.ClassEditor.LinkedSkill>
+  <DNP.ClassEditor.HintAbilities>Las habilidades se desbloquean al alcanzar un nivel. Daño 0 = utilidad/soporte.</DNP.ClassEditor.HintAbilities>
+  <DNP.ClassEditor.AddAbility>Añadir habilidad</DNP.ClassEditor.AddAbility>
+  <DNP.ClassEditor.ErrorNoId>El ID de clase no puede estar vacío.</DNP.ClassEditor.ErrorNoId>
+  <DNP.ClassEditor.ErrorNoName>El nombre de clase no puede estar vacío.</DNP.ClassEditor.ErrorNoName>
+  <DNP.ClassEditor.ErrorDuplicateId>Ya existe una clase con el ID "{0}".</DNP.ClassEditor.ErrorDuplicateId>
+
+
+  <DNP.World.CampaignQuick>CAMPAÑA (configuración rápida opcional)</DNP.World.CampaignQuick>
+  <DNP.World.SwitchToDetailed>Cambia al modo Detallado para historia, facciones, lugares e instrucciones de IA.</DNP.World.SwitchToDetailed>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB PRINCIPAL — botón de ajustes
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.MainTab.Settings>⚙ Ajustes</DNP.MainTab.Settings>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ESTADO DE LLM
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.LLM.StatusNotConnected>Sin conexión — configura en Ajustes.</DNP.LLM.StatusNotConnected>
+  <DNP.LLM.StatusConnected>Conectado</DNP.LLM.StatusConnected>
+  <DNP.LLM.StatusAuthenticating>Autenticando...</DNP.LLM.StatusAuthenticating>
+  <DNP.LLM.StatusAuthFailed>Autenticación fallida.</DNP.LLM.StatusAuthFailed>
+  <DNP.LLM.StatusKeyRestored>Clave restaurada desde archivo.</DNP.LLM.StatusKeyRestored>
+  <DNP.LLM.StatusKeyExpired>Clave expirada — reconecta en Ajustes.</DNP.LLM.StatusKeyExpired>
+  <DNP.LLM.StatusTesting>Probando conexión...</DNP.LLM.StatusTesting>
+  <DNP.LLM.StatusConnectFailed>Conexión fallida.</DNP.LLM.StatusConnectFailed>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENTANA DE AJUSTES
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Settings.Title>Dungeons &amp; Pawns — Ajustes</DNP.Settings.Title>
+  <DNP.Settings.Save>Guardar y cerrar</DNP.Settings.Save>
+
+  <DNP.Settings.SectionProvider>Proveedor de IA</DNP.Settings.SectionProvider>
+  <DNP.Settings.SectionConfig>Configuración</DNP.Settings.SectionConfig>
+  <DNP.Settings.SectionTest>Probar conexión</DNP.Settings.SectionTest>
+  <DNP.Settings.SectionAbout>Acerca de</DNP.Settings.SectionAbout>
+
+  <!-- Player2 App -->
+  <DNP.Settings.Player2AppHint>Usa la aplicación Player2 corriendo en tu máquina. No necesitas clave API — solo abre la app e inicia sesión. El mod se conectará automáticamente.</DNP.Settings.Player2AppHint>
+  <DNP.Settings.Player2Authenticated>Autenticado con la app Player2</DNP.Settings.Player2Authenticated>
+  <DNP.Settings.Player2Revoke>Desconectar</DNP.Settings.Player2Revoke>
+  <DNP.Settings.Player2NotAuth>Sin conexión a la app Player2</DNP.Settings.Player2NotAuth>
+  <DNP.Settings.Player2Connect>Conectar con la app Player2</DNP.Settings.Player2Connect>
+  <DNP.Settings.Player2Connected>¡Conectado con éxito!</DNP.Settings.Player2Connected>
+  <DNP.Settings.Connecting>Conectando...</DNP.Settings.Connecting>
+
+  <!-- Clave API -->
+  <DNP.Settings.ApiKey>Clave API</DNP.Settings.ApiKey>
+  <DNP.Settings.Show>Mostrar</DNP.Settings.Show>
+  <DNP.Settings.Hide>Ocultar</DNP.Settings.Hide>
+  <DNP.Settings.ApiKeyPlaceholder>Haz clic para ingresar la clave API...</DNP.Settings.ApiKeyPlaceholder>
+  <DNP.Settings.GetKey>Obtén tu clave API en:</DNP.Settings.GetKey>
+
+  <!-- Modelo -->
+  <DNP.Settings.Model>Modelo</DNP.Settings.Model>
+  <DNP.Settings.ModelSuggestion>Sugerido:</DNP.Settings.ModelSuggestion>
+  <DNP.Settings.UseDefault>Usar sugerido</DNP.Settings.UseDefault>
+
+  <!-- Endpoint personalizado -->
+  <DNP.Settings.CustomEndpoint>URL del endpoint</DNP.Settings.CustomEndpoint>
+  <DNP.Settings.CustomEndpointHint>Ingresa la URL base de tu servidor compatible con OpenAI. Ejemplos: http://localhost:11434 (Ollama), http://localhost:1234 (LM Studio), https://tu-servidor.com/v1</DNP.Settings.CustomEndpointHint>
+
+  <!-- Hints de proveedor -->
+  <DNP.Settings.Hint.Player2Web>Player2 Web API — obtén tu clave en player2.game. Funciona sin la app Player2 instalada.</DNP.Settings.Hint.Player2Web>
+  <DNP.Settings.Hint.OpenAI>API de OpenAI — requiere cuenta de pago. gpt-4o-mini es la opción más económica.</DNP.Settings.Hint.OpenAI>
+  <DNP.Settings.Hint.OpenRouter>OpenRouter te da acceso a muchos modelos (OpenAI, Anthropic, Mistral, etc.) con una sola clave. El modelo va en formato "proveedor/modelo".</DNP.Settings.Hint.OpenRouter>
+  <DNP.Settings.Hint.Gemini>Google Gemini — capa gratuita disponible en Google AI Studio. gemini-2.0-flash es rápido y gratuito.</DNP.Settings.Hint.Gemini>
+  <DNP.Settings.Hint.Custom>Cualquier API compatible con OpenAI — Ollama, LM Studio, KoboldAI, o un servidor propio. La clave API es opcional.</DNP.Settings.Hint.Custom>
+
+  <!-- Prueba -->
+  <DNP.Settings.TestConnection>Probar conexión</DNP.Settings.TestConnection>
+  <DNP.Settings.Testing>Enviando solicitud de prueba...</DNP.Settings.Testing>
+  <DNP.Settings.TestOK>¡Conexión exitosa!</DNP.Settings.TestOK>
+
+  <!-- Acerca de -->
+  <DNP.Settings.AboutLicense>Código abierto — GPL v3 con términos de integración Player2. Player2 debe mantenerse como opción compatible en todos los forks.</DNP.Settings.AboutLicense>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONFIGURACIÓN DE MOD — LLM
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Settings.SectionProvider>Proveedor de IA</DNP.Settings.SectionProvider>
+  <DNP.Settings.ProviderLabel>Selecciona qué servicio de IA controla al DM y las respuestas de los colonos:</DNP.Settings.ProviderLabel>
+  <DNP.Settings.SectionShared>Configuración general</DNP.Settings.SectionShared>
+  <DNP.Settings.MaxTokens>Longitud máxima de respuesta: {0} tokens</DNP.Settings.MaxTokens>
+  <DNP.Settings.DebugMode>Modo debug (registrar todas las peticiones y respuestas)</DNP.Settings.DebugMode>
+  <DNP.Settings.DebugModeTooltip>Registra todas las peticiones y respuestas de IA en el log de RimWorld.</DNP.Settings.DebugModeTooltip>
+  <DNP.Settings.SectionTest>Prueba de conexión</DNP.Settings.SectionTest>
+  <DNP.Settings.TestButton>Probar conexión</DNP.Settings.TestButton>
+  <DNP.Settings.TestRunning>Probando conexión...</DNP.Settings.TestRunning>
+  <DNP.Settings.APIKey>API Key:</DNP.Settings.APIKey>
+  <DNP.Settings.Model>Modelo:</DNP.Settings.Model>
+  <DNP.Settings.KeyShow>Mostrar</DNP.Settings.KeyShow>
+  <DNP.Settings.KeyHide>Ocultar</DNP.Settings.KeyHide>
+
+  <!-- Player2 -->
+  <DNP.Settings.P2Connected>Conectado a Player2</DNP.Settings.P2Connected>
+  <DNP.Settings.P2NotConnected>Sin conectar — conecta tu cuenta de Player2 para usar la IA.</DNP.Settings.P2NotConnected>
+  <DNP.Settings.P2Connecting>Conectando...</DNP.Settings.P2Connecting>
+  <DNP.Settings.P2WaitingCode>Esperando aprobación del navegador... Código: {0}</DNP.Settings.P2WaitingCode>
+  <DNP.Settings.P2ConnectApp>Conectar con la App de Player2</DNP.Settings.P2ConnectApp>
+  <DNP.Settings.P2ConnectBrowser>Conectar con el navegador</DNP.Settings.P2ConnectBrowser>
+  <DNP.Settings.P2ConnectHint>App = instantáneo si Player2 está abierto. Navegador = abre player2.game para iniciar sesión.</DNP.Settings.P2ConnectHint>
+  <DNP.Settings.P2Disconnect>Desconectar de Player2</DNP.Settings.P2Disconnect>
+  <DNP.Settings.P2ManualKey>API key manual (alternativa a App/Navegador):</DNP.Settings.P2ManualKey>
+  <DNP.Settings.P2AppNotFound>No se encontró la App de Player2. Asegúrate de que esté abierta y hayas iniciado sesión.</DNP.Settings.P2AppNotFound>
+  <DNP.Settings.P2ConnectedMsg>¡Conectado a Player2!</DNP.Settings.P2ConnectedMsg>
+  <DNP.Settings.NeedActiveGame>Carga una partida primero para usar esta función.</DNP.Settings.NeedActiveGame>
+
+  <!-- OpenAI -->
+  <DNP.Settings.OAIModelHint>Modelos: gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo</DNP.Settings.OAIModelHint>
+
+  <!-- OpenRouter -->
+  <DNP.Settings.ORModelHint>Explora modelos en openrouter.ai/models. Formato: proveedor/nombre-modelo</DNP.Settings.ORModelHint>
+
+  <!-- Gemini -->
+  <DNP.Settings.GeminiModelHint>Modelos: gemini-2.0-flash-001, gemini-1.5-pro, gemini-1.5-flash</DNP.Settings.GeminiModelHint>
+
+  <!-- Custom -->
+  <DNP.Settings.CustomEndpoint>URL del endpoint:</DNP.Settings.CustomEndpoint>
+  <DNP.Settings.CustomKeyOptional>opcional</DNP.Settings.CustomKeyOptional>
+  <DNP.Settings.CustomModelOptional>opcional — vacío usa el modelo por defecto del servidor</DNP.Settings.CustomModelOptional>
+  <DNP.Settings.CustomHint>Compatible con cualquier endpoint estilo OpenAI:</DNP.Settings.CustomHint>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONFIGURACIÓN DEL DIRECTOR
+  ═══════════════════════════════════════════════════════ -->
+  <DNP.Settings.SectionDirector>Director DM</DNP.Settings.SectionDirector>
+  <DNP.Settings.DirectorProfile>Perfil del Director</DNP.Settings.DirectorProfile>
+  <DNP.Settings.ColonistInitiative>Iniciativa de colonos IA</DNP.Settings.ColonistInitiative>
+  <DNP.Settings.InactivitySpeed>Aviso por inactividad del jugador</DNP.Settings.InactivitySpeed>
+  <DNP.Settings.EnemyDifficulty>Dificultad de enemigos</DNP.Settings.EnemyDifficulty>
+  <DNP.Settings.EnemyDifficultyHint>Modifica el bonus de ataque de los enemigos. Afecta a todos los encuentros.</DNP.Settings.EnemyDifficultyHint>
+
+  <DNP.Director.Narrator>Narrador</DNP.Director.Narrator>
+  <DNP.Director.NarratorDesc>Prioridad narrativa. El jugador tiene más espacio. Los colonos IA reaccionan más que actúan. El DM se enfoca en el drama más que en la dificultad.</DNP.Director.NarratorDesc>
+  <DNP.Director.Tactical>Táctico</DNP.Director.Tactical>
+  <DNP.Director.TacticalDesc>Prioridad de combate. Orden de iniciativa estricto, los enemigos usan sus habilidades, narración mecánicamente precisa.</DNP.Director.TacticalDesc>
+  <DNP.Director.Chaotic>Caótico</DNP.Director.Chaotic>
+  <DNP.Director.ChaoticDesc>Impredecible. Los colonos IA toman la iniciativa con más frecuencia. Eventos inesperados pueden interrumpir cualquier turno.</DNP.Director.ChaoticDesc>
+
+  <DNP.Director.Reactive>Reactivos</DNP.Director.Reactive>
+  <DNP.Director.Active>Activos</DNP.Director.Active>
+  <DNP.Director.VeryActive>Muy activos</DNP.Director.VeryActive>
+  <DNP.Director.Patient>Paciente</DNP.Director.Patient>
+  <DNP.Director.Normal>Normal</DNP.Director.Normal>
+  <DNP.Director.Urgent>Urgente</DNP.Director.Urgent>
+  <DNP.Director.Easy>Fácil</DNP.Director.Easy>
+  <DNP.Director.Hard>Difícil</DNP.Director.Hard>
+  <DNP.Director.Brutal>Brutal</DNP.Director.Brutal>
+
+  <!-- Strings de sesión / log IA -->
+  <DNP.Session.YourAction>Tu acción</DNP.Session.YourAction>
+  <DNP.Log.RoundStart>— Comienza la ronda {0} —</DNP.Log.RoundStart>
+  <DNP.Log.InitiativeOrder>Orden de iniciativa: {0}</DNP.Log.InitiativeOrder>
+  <DNP.Log.AIDisabled>IA no configurada. Modo manual — el DM narra todo manualmente.</DNP.Log.AIDisabled>
+  <DNP.Log.EncounterWon>¡El grupo ha derrotado a todos los enemigos!</DNP.Log.EncounterWon>
+  <DNP.Log.PartyWiped>El grupo ha caído...</DNP.Log.PartyWiped>
+
+
+  <DNP.Session.YouLabel>★ = Tu personaje</DNP.Session.YouLabel>
+
+  <DNP.Setup.YourCharacter>TU PERSONAJE</DNP.Setup.YourCharacter>
+  <DNP.Setup.SelectPlayersFirst>← Selecciona jugadores primero</DNP.Setup.SelectPlayersFirst>
+  <DNP.Setup.JustObserve>Solo observar (sin personaje)</DNP.Setup.JustObserve>
+  <DNP.Session.DMConsole>CONSOLA DM</DNP.Session.DMConsole>
+  <DNP.Dice.Critical>¡CRÍTICO!</DNP.Dice.Critical>
+  <DNP.Dice.Fumble>¡PIFIA!</DNP.Dice.Fumble>
+
+  <DNP.Session.RequestRoll>Pedir tirada</DNP.Session.RequestRoll>
+  <DNP.Session.RequestRollBtn>Pedir tirada de d20...</DNP.Session.RequestRollBtn>
+  <DNP.Session.RollD20>Lanzar d20</DNP.Session.RollD20>
+  <DNP.Roll.WhoRolls>¿Quién tira?</DNP.Roll.WhoRolls>
+  <DNP.Roll.Context>Contexto (opcional — ej. "Tirada de Fuerza para levantar la reja")</DNP.Roll.Context>
+  <DNP.Roll.WillShowButton>★ {0} verá un botón de tirada en el log.</DNP.Roll.WillShowButton>
+  <DNP.Roll.WillAutoRoll>{0} tirará automáticamente.</DNP.Roll.WillAutoRoll>
+  <DNP.Roll.Request>Pedir tirada</DNP.Roll.Request>
+  <DNP.Roll.DefaultContext>El DM pide una tirada.</DNP.Roll.DefaultContext>
+  <DNP.Roll.RequestedLog>El DM le pide una tirada a {0}.</DNP.Roll.RequestedLog>
+
+  <DNP.Session.Inventory>INVENTARIO</DNP.Session.Inventory>
+  <DNP.Session.UseItem>Usar</DNP.Session.UseItem>
+  <DNP.Log.LootFound>Botín encontrado:</DNP.Log.LootFound>
+
+  <DNP.Session.DMConsoleBtn>🎲 Herr. DM</DNP.Session.DMConsoleBtn>
+
+  <DNP.Session.SkillCheck>Tirada de habilidad</DNP.Session.SkillCheck>
+  <DNP.Session.Attack>Atacar</DNP.Session.Attack>
+  <DNP.Session.Skill>Habilidad</DNP.Session.Skill>
+  <DNP.Session.YourTurn>★ Tu turno — elige una acción</DNP.Session.YourTurn>
+  <DNP.Session.WaitingTurn>Esperando: turno de {0}...</DNP.Session.WaitingTurn>
+  <DNP.Session.SelectTarget>Selecciona objetivo:</DNP.Session.SelectTarget>
+
+  <DNP.World.ExistingWorlds>MUNDOS</DNP.World.ExistingWorlds>
+  <DNP.World.NewWorld>Nuevo mundo</DNP.World.NewWorld>
+
+  <DNP.Session.WorldBtn>Mundo</DNP.Session.WorldBtn>
+  <DNP.Log.SpeakerBriefing>💡 Briefing DM</DNP.Log.SpeakerBriefing>
+
+  <DNP.Settings.SectionContent>Contenido del juego</DNP.Settings.SectionContent>
+  <DNP.Settings.EditEnemies>Enemigos</DNP.Settings.EditEnemies>
+  <DNP.Settings.EditItems>Objetos</DNP.Settings.EditItems>
+  <DNP.Settings.EditScenarios>Escenarios</DNP.Settings.EditScenarios>
+  <DNP.Editor.Enemies>Editar enemigos</DNP.Editor.Enemies>
+  <DNP.Editor.Items>Editar objetos</DNP.Editor.Items>
+  <DNP.Editor.Scenarios>Editar escenarios</DNP.Editor.Scenarios>
+  <DNP.Editor.Name>Nombre</DNP.Editor.Name>
+  <DNP.Editor.HP>PV</DNP.Editor.HP>
+  <DNP.Editor.Armor>Armadura</DNP.Editor.Armor>
+  <DNP.Editor.Damage>Daño</DNP.Editor.Damage>
+  <DNP.Editor.AttackBonus>Bonus ataque</DNP.Editor.AttackBonus>
+  <DNP.Editor.Behavior>Comportamiento</DNP.Editor.Behavior>
+  <DNP.Editor.Loot>Botín (id objeto · probabilidad)</DNP.Editor.Loot>
+  <DNP.Editor.AddLoot>Añadir botín</DNP.Editor.AddLoot>
+  <DNP.Editor.Save>Guardar</DNP.Editor.Save>
+  <DNP.Editor.Delete>Eliminar</DNP.Editor.Delete>
+  <DNP.Editor.NewEnemy>Nuevo enemigo</DNP.Editor.NewEnemy>
+  <DNP.Editor.NewItem>Nuevo objeto</DNP.Editor.NewItem>
+  <DNP.Editor.NewScenario>Nuevo escenario</DNP.Editor.NewScenario>
+  <DNP.Editor.ItemType>Tipo</DNP.Editor.ItemType>
+  <DNP.Editor.Effect>Efecto</DNP.Editor.Effect>
+  <DNP.Editor.Value>Valor (PV curados / turnos de buff)</DNP.Editor.Value>
+  <DNP.Editor.DmgBonus>Bonus de daño</DNP.Editor.DmgBonus>
+  <DNP.Editor.ArmorBonus>Bonus de armadura</DNP.Editor.ArmorBonus>
+  <DNP.Editor.Opening>Narración de apertura</DNP.Editor.Opening>
+  <DNP.Editor.EnemyList>Enemigos del encuentro</DNP.Editor.EnemyList>
+  <DNP.Editor.AddEnemy>Añadir enemigo</DNP.Editor.AddEnemy>
+  <DNP.Editor.Saved>{0} guardado.</DNP.Editor.Saved>
+<DNP.Session.Title>Dungeons &amp; Pawns</DNP.Session.Title>
+
+  <DNP.MainTab.SessionHistory>📜 Historial de sesiones</DNP.MainTab.SessionHistory>
+  <DNP.History.Title>Historial de sesiones</DNP.History.Title>
+  <DNP.History.NoSessions>No se encontraron sesiones guardadas.</DNP.History.NoSessions>
+  <DNP.History.EmptyLog>Esta sesión no tiene entradas en el log.</DNP.History.EmptyLog>
+  <DNP.History.SessionHeader>{0} entradas en el log</DNP.History.SessionHeader>
+  <DNP.History.DeleteConfirm>¿Eliminar la sesión "{0}"? Esta acción no se puede deshacer.</DNP.History.DeleteConfirm>
+  <DNP.ClassEditor.FieldNarrativeStyle>Estilo narrativo (para la IA narradora)</DNP.ClassEditor.FieldNarrativeStyle>
+  <DNP.ClassEditor.HintNarrativeStyle>Cómo piensa, habla y actúa este arquetipo — en combate Y en roleplay. El DM-IA y el colono-IA usan esto para mantenerse en personaje.</DNP.ClassEditor.HintNarrativeStyle>
+
+  <DNP.Settings.GeminiActiveModel>Modelo activo: {0}</DNP.Settings.GeminiActiveModel>
+  <DNP.Settings.GeminiNeedKey>Ingresa tu API key de Gemini para explorar los modelos disponibles.</DNP.Settings.GeminiNeedKey>
+  <DNP.Settings.GeminiFetchModels>🔄 Explorar modelos disponibles</DNP.Settings.GeminiFetchModels>
+  <DNP.Settings.GeminiFetching>Obteniendo modelos...</DNP.Settings.GeminiFetching>
+  <DNP.Settings.GeminiSearch>Buscar modelos:</DNP.Settings.GeminiSearch>
+  <DNP.Settings.GeminiModelCount>{0} modelos — clic para seleccionar</DNP.Settings.GeminiModelCount>
+  <DNP.Settings.GeminiActive>Activo</DNP.Settings.GeminiActive>
+  <DNP.Settings.GeminiPending>Pendiente</DNP.Settings.GeminiPending>
+  <DNP.Settings.GeminiConfirm>✔ Usar {0}</DNP.Settings.GeminiConfirm>
+  <DNP.Settings.GeminiCancel>✖ Cancelar</DNP.Settings.GeminiCancel>
+  <DNP.Settings.GeminiManualHint>O escribe el nombre del modelo manualmente:</DNP.Settings.GeminiManualHint>
+  <DNP.Settings.GeminiFetchOK>{0} modelos encontrados</DNP.Settings.GeminiFetchOK>
+  <DNP.Settings.GeminiFetchEmpty>No se encontraron modelos compatibles para esta API key.</DNP.Settings.GeminiFetchEmpty>
+  <DNP.Settings.GeminiModelSaved>Modelo Gemini establecido: {0}</DNP.Settings.GeminiModelSaved>
+
+  <DNP.Log.SpeakerDMAssist>Narrador</DNP.Log.SpeakerDMAssist>
+<DNP.Log.SpeakerDMPlayer>DM (tú)</DNP.Log.SpeakerDMPlayer>
+<DNP.Log.Thinking>{0} está pensando...</DNP.Log.Thinking>
+</LanguageData>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+    All game content (rulesets, classes, enemies, items, scenarios)
+    is now loaded from JSON files in:
+      <SaveData>/DungeonsAndPawns/rulesets/
+      <SaveData>/DungeonsAndPawns/classes/
+      <SaveData>/DungeonsAndPawns/enemies/
+      <SaveData>/DungeonsAndPawns/items/
+      <SaveData>/DungeonsAndPawns/scenarios/
+
+    Default content is copied from the mod's DefaultContent/ folder
+    on first run. See DNP_ContentLoader.cs and DNP_ClassLoader.cs.
+
+    ThoughtDefs and MainButtonDef remain in DNP_ThoughtsAndUI.xml
+    because they must be registered with RimWorld's engine.
+  -->
+</Defs>

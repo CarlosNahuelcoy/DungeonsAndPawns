@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════
+       THOUGHTS — mood effects after sessions
+  ═══════════════════════════════════════ -->
+  <ThoughtDef>
+    <defName>DNP_GoodSession</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>had a great tabletop session</label>
+        <description>That session was exactly what I needed. Good story, good company.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>DNP_BadSession</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>had a rough tabletop session</label>
+        <description>We got wiped. Again. I rolled a 1 at the worst possible moment.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>DNP_GrandVictory</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>completed an epic adventure</label>
+        <description>We actually did it. Against all odds, we cleared the whole thing.</description>
+        <baseMoodEffect>14</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- ═══════════════════════════════════════
+       MAIN BUTTON — bottom bar tab
+  ═══════════════════════════════════════ -->
+  <MainButtonDef>
+    <defName>DNP_MainButton</defName>
+    <label>D&amp;P</label>
+    <defaultPriority>2020</defaultPriority>
+    <tabWindowClass>DungeonsAndPawns.DNP_MainTabWindow</tabWindowClass>
+    <minimized>false</minimized>
+  </MainButtonDef>
+
+</Defs>

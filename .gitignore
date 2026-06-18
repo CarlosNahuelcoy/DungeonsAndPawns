@@ -1,0 +1,24 @@
+# Build output
+.vscode/obj/
+.vscode/mod.csproj
+Source/obj/
+1.6/Assemblies/
+
+# NuGet generated files
+project.assets.json
+*.nuget.cache
+*.nuget.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+
+# MSBuild cache
+*.assets.cache
+*.AssemblyReference.cache
+*.CoreCompileInputs.cache
+*.FileListAbsolute.txt
+*.Up2Date
+*.GeneratedMSBuildEditorConfig.editorconfig
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "DungeonsAndPawns",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "build dll",
+            "args": [],
+            "program": "",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "internalConsoleOptions": "neverOpen",
+            "stopAtEntry": true
+        }
+    ]
+}
