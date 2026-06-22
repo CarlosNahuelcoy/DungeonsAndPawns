@@ -65,13 +65,26 @@ namespace DungeonsAndPawns
             GUI.color = Color.white;
             y += 20f;
 
-            // New world button
+            // New world button — saves the current world first so it's not lost
             if (Widgets.ButtonText(new Rect(inner.x, y, inner.width, 26f),
                 "+ " + "DNP.World.NewWorld".Translate()))
             {
-                world = new DNP_WorldData();
+                // CRITICAL FIX: persist the current world to disk before replacing it.
+                // Previously this just overwrote `world` in memory, so anything
+                // not yet saved (or even saved-but-not-exported) could be lost,
+                // and the "+ New World" button looked like it was resetting
+                // an existing world instead of creating a blank one.
+                if (world != null && !string.IsNullOrWhiteSpace(world.worldName)
+                    && world.worldName != "Unnamed World")
+                {
+                    DNP_JsonManager.ExportWorld(world);
+                }
+
+                world = new DNP_WorldData { worldName = "Unnamed World" };
                 if (DNP_GameComponent.Instance != null)
                     DNP_GameComponent.Instance.World = world;
+
+                _worldFiles = DNP_JsonManager.GetWorldFiles();
             }
             y += 30f;
 
@@ -113,6 +126,13 @@ namespace DungeonsAndPawns
 
                 if (!isCurrent && Widgets.ButtonInvisible(row))
                 {
+                    // Save the current world before switching, same fix as above
+                    if (world != null && !string.IsNullOrWhiteSpace(world.worldName)
+                        && world.worldName != "Unnamed World")
+                    {
+                        DNP_JsonManager.ExportWorld(world);
+                    }
+
                     var loaded = DNP_JsonManager.ImportWorld(file);
                     if (loaded != null)
                     {
@@ -166,7 +186,7 @@ namespace DungeonsAndPawns
             // ── Row 2: Mode toggle ────────────────────────────
             Text.Font = GameFont.Tiny;
             GUI.color = Color.gray;
-            Widgets.Label(new Rect(x, y + 7f, 46f, 18f), "MODO:");
+            Widgets.Label(new Rect(x, y + 7f, 46f, 18f), "MODE:");
             GUI.color = Color.white;
 
             float mw = 108f;
@@ -451,17 +471,40 @@ namespace DungeonsAndPawns
         {
             var comp = DNP_GameComponent.Instance;
             if (comp != null)
-            {
                 comp.World = world;
-                _worldFiles = DNP_JsonManager.GetWorldFiles(); // refresh sidebar
-                Messages.Message("DNP.World.Saved".Translate(),
-                    MessageTypeDefOf.TaskCompletion, false);
+
+            // CRITICAL FIX: the previous version only assigned the world to the
+            // GameComponent in memory and never wrote it to disk. That meant
+            // "Save" looked like it worked (you got the confirmation message)
+            // but reopening the editor — or even just the GameComponent not
+            // being saved/loaded correctly with the save file — could make the
+            // world look blank again. Exporting to JSON here guarantees the
+            // world survives independently of save/load timing, and it also
+            // means the world now shows up immediately in the sidebar list and
+            // in the Setup dialog's world picker.
+            if (!string.IsNullOrWhiteSpace(world.worldName) && world.worldName != "Unnamed World")
+            {
+                DNP_JsonManager.ExportWorld(world);
+                _worldFiles = DNP_JsonManager.GetWorldFiles();
             }
+
+            Messages.Message("DNP.World.Saved".Translate(),
+                MessageTypeDefOf.TaskCompletion, false);
         }
 
         public override void PostClose()
         {
-            SaveWorld();
+            // FIX: this used to call SaveWorld() automatically on every close,
+            // which silently re-exported the world to a NEW timestamped file
+            // each time the window was opened and closed — even with zero
+            // edits. That's exactly what produced duplicate "Las Tierras
+            // Olvidadas" entries in the sidebar. Saving must now be an
+            // explicit, deliberate action via the "Guardar" button only.
+            // We still sync the in-memory GameComponent reference so the
+            // session can see whatever was last edited, but we no longer
+            // write to disk just because the window closed.
+            var comp = DNP_GameComponent.Instance;
+            if (comp != null) comp.World = world;
             base.PostClose();
         }
     }

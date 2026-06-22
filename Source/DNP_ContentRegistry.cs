@@ -7,11 +7,6 @@ using Verse;
 
 namespace DungeonsAndPawns
 {
-    // ─────────────────────────────────────────────────────────────
-    // RUNTIME DATA MODELS
-    // These replace the old XML Def classes entirely.
-    // ─────────────────────────────────────────────────────────────
-
     public class DNP_RulesetData
     {
         public string id;
@@ -60,7 +55,7 @@ namespace DungeonsAndPawns
         public string itemName;
         public string description;
 
-        public string itemType        = "Weapon"; // Weapon, Armor, Consumable, Quest
+        public string itemType        = "Weapon";
         public int    damageBonus     = 0;
         public string statBonusType   = "";
         public int    statBonusAmount = 0;
@@ -101,12 +96,8 @@ namespace DungeonsAndPawns
         public int    count = 1;
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // CONTENT REGISTRY — in-memory store for all JSON content
-    // ─────────────────────────────────────────────────────────────
     public static class DNP_ContentRegistry
     {
-        // Rulesets
         private static List<DNP_RulesetData>  _rulesets  = new List<DNP_RulesetData>();
         private static List<DNP_EnemyData>    _enemies   = new List<DNP_EnemyData>();
         private static List<DNP_ItemData>     _items     = new List<DNP_ItemData>();
@@ -122,18 +113,44 @@ namespace DungeonsAndPawns
         public static DNP_ItemData     GetItem    (string id) => _items    .FirstOrDefault(x => x.id == id);
         public static DNP_ScenarioData GetScenario(string id) => _scenarios.FirstOrDefault(x => x.id == id);
 
-        public static DNP_RulesetData FirstRuleset =>
-            _rulesets.FirstOrDefault(r => r.id == "standard") ?? _rulesets.FirstOrDefault();
+        // FIX: "No Ruleset found - Cannot start session" error.
+        // If disk loading/writing failed for any reason (permissions, a
+        // corrupted file, a race on first launch, etc.) _rulesets could end
+        // up empty and FirstRuleset would return null, which the Setup
+        // dialog then surfaced as a hard error with no way to recover short
+        // of manually fixing files. This guarantees there is always at least
+        // one usable in-memory ruleset, completely independent of disk I/O.
+        private static readonly DNP_RulesetData _hardcodedFallback = new DNP_RulesetData
+        {
+            id = "standard_fallback",
+            label = "Standard Rules (fallback)",
+            description = "Built-in fallback ruleset used when no ruleset files could be loaded from disk.",
+            checkDiceSides = 20,
+            statBonusInterval = 2,
+            baseXpPerLevel = 100,
+            xpMultiplierPerLevel = 1.5f,
+            maxPlayers = 4,
+            applyMoodBuffs = true,
+            applyMoodDebuffs = true,
+            successThoughtDef = "DNP_GoodSession",
+            failureThoughtDef = "DNP_BadSession",
+            useColonistSkillBonuses = true
+        };
 
-        public static void SetRulesets (List<DNP_RulesetData>  r) { _rulesets  = r ?? new List<DNP_RulesetData>();  }
+        public static DNP_RulesetData FirstRuleset =>
+            _rulesets.FirstOrDefault(r => r.id == "standard")
+            ?? _rulesets.FirstOrDefault()
+            ?? _hardcodedFallback;
+
+        public static void SetRulesets (List<DNP_RulesetData>  r)
+        {
+            _rulesets = (r != null && r.Count > 0) ? r : new List<DNP_RulesetData> { _hardcodedFallback };
+        }
         public static void SetEnemies  (List<DNP_EnemyData>    e) { _enemies   = e ?? new List<DNP_EnemyData>();    }
         public static void SetItems    (List<DNP_ItemData>      i) { _items     = i ?? new List<DNP_ItemData>();     }
         public static void SetScenarios(List<DNP_ScenarioData>  s) { _scenarios = s ?? new List<DNP_ScenarioData>(); }
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // CONTENT LOADER — reads all JSON folders at startup
-    // ─────────────────────────────────────────────────────────────
     public static class DNP_ContentLoader
     {
         private static string Root       => Path.Combine(GenFilePaths.SaveDataFolderPath, "DungeonsAndPawns");
@@ -145,48 +162,79 @@ namespace DungeonsAndPawns
 
         public static void Load()
         {
-            EnsureFolders();
-            CopyDefaults();
-
-            var rulesets  = LoadRulesets();
-            var enemies   = LoadEnemies();
-            var items     = LoadItems();
-            var scenarios = LoadScenarios();
-
-            // If any category is empty, embedded defaults weren't copied — force them now
-            if (rulesets.Count == 0 || enemies.Count == 0 || items.Count == 0)
+            try
             {
-                Log.Warning("[DungeonsAndPawns] Some content categories empty — forcing embedded defaults.");
-                WriteEmbeddedDefaults();
-                if (rulesets.Count  == 0) rulesets  = LoadRulesets();
-                if (enemies.Count   == 0) enemies   = LoadEnemies();
-                if (items.Count     == 0) items     = LoadItems();
-                if (scenarios.Count == 0) scenarios = LoadScenarios();
-            }
+                EnsureFolders();
+                CopyDefaults();
 
-            // Ensure default world exists even if other content was already present
-            if (!Directory.GetFiles(Worlds, "*.json").Any())
+                var rulesets  = LoadRulesets();
+                var enemies   = LoadEnemies();
+                var items     = LoadItems();
+                var scenarios = LoadScenarios();
+
+                if (rulesets.Count == 0 || enemies.Count == 0 || items.Count == 0)
+                {
+                    Log.Warning("[DungeonsAndPawns] Some content categories empty — forcing embedded defaults.");
+                    WriteEmbeddedDefaults();
+                    if (rulesets.Count  == 0) rulesets  = LoadRulesets();
+                    if (enemies.Count   == 0) enemies   = LoadEnemies();
+                    if (items.Count     == 0) items     = LoadItems();
+                    if (scenarios.Count == 0) scenarios = LoadScenarios();
+                }
+
+                // FIX: belt-and-suspenders. Even after the disk-based fallback
+                // above, register the in-code embedded ruleset directly into
+                // memory if rulesets is STILL empty (e.g. disk is fully
+                // read-only/unwritable). This is what guarantees
+                // DNP_ContentRegistry.FirstRuleset is never null, no matter
+                // how badly the filesystem behaves on a given machine.
+                if (rulesets.Count == 0)
+                {
+                    Log.Warning("[DungeonsAndPawns] Rulesets still empty after disk fallback — "
+                        + "using in-memory embedded ruleset only (nothing was written to disk).");
+                    rulesets = new List<DNP_RulesetData> { EmbeddedStandard(), EmbeddedGrim() };
+                }
+                if (enemies.Count == 0)
+                    enemies = new List<DNP_EnemyData> { EmbeddedGoblin(), EmbeddedOrc(), EmbeddedDarkMage() };
+                if (items.Count == 0)
+                    items = EmbeddedItems();
+
+                if (!Directory.GetFiles(Worlds, "*.json").Any())
+                {
+                    SaveWorldFile(EmbeddedDefaultWorldEN(), "world_dnd_default");
+                    SaveWorldFile(EmbeddedDefaultWorldES(), "world_dnd_default_es");
+                }
+
+                DNP_ContentRegistry.SetRulesets (rulesets);
+                DNP_ContentRegistry.SetEnemies  (enemies);
+                DNP_ContentRegistry.SetItems    (items);
+                DNP_ContentRegistry.SetScenarios(scenarios);
+
+                Log.Message("[DungeonsAndPawns] Content loaded — "
+                    + DNP_ContentRegistry.AllRulesets.Count  + " rulesets, "
+                    + DNP_ContentRegistry.AllEnemies.Count   + " enemies, "
+                    + DNP_ContentRegistry.AllItems.Count     + " items, "
+                    + DNP_ContentRegistry.AllScenarios.Count + " scenarios.");
+            }
+            catch (Exception ex)
             {
-                SaveWorldFile(EmbeddedDefaultWorldEN(), "world_dnd_default");
-                SaveWorldFile(EmbeddedDefaultWorldES(), "world_dnd_default_es");
+                // FIX: previously an exception anywhere in Load() (e.g. a
+                // permissions error thrown by Directory.CreateDirectory)
+                // would propagate up and potentially leave the registry in
+                // a half-initialized state with zero rulesets, with nothing
+                // logged in an obviously visible way. Catching here and
+                // forcing the in-memory fallback means the mod degrades
+                // gracefully instead of failing the whole session-start flow.
+                Log.Error("[DungeonsAndPawns] Content loading failed entirely: " + ex
+                    + " — falling back to in-memory defaults only.");
+                DNP_ContentRegistry.SetRulesets(new List<DNP_RulesetData> { EmbeddedStandard() });
+                DNP_ContentRegistry.SetEnemies(new List<DNP_EnemyData> { EmbeddedGoblin() });
+                DNP_ContentRegistry.SetItems(EmbeddedItems());
+                DNP_ContentRegistry.SetScenarios(new List<DNP_ScenarioData>());
             }
-
-            DNP_ContentRegistry.SetRulesets (rulesets);
-            DNP_ContentRegistry.SetEnemies  (enemies);
-            DNP_ContentRegistry.SetItems    (items);
-            DNP_ContentRegistry.SetScenarios(scenarios);
-
-            Log.Message("[DungeonsAndPawns] Content loaded — "
-                + DNP_ContentRegistry.AllRulesets.Count  + " rulesets, "
-                + DNP_ContentRegistry.AllEnemies.Count   + " enemies, "
-                + DNP_ContentRegistry.AllItems.Count     + " items, "
-                + DNP_ContentRegistry.AllScenarios.Count + " scenarios.");
         }
 
-        // ── Reload (called after in-game edits) ────────────────
         public static void Reload() => Load();
-
-        // ── Loaders ────────────────────────────────────────────
 
         private static List<DNP_RulesetData> LoadRulesets()
         {
@@ -216,9 +264,9 @@ namespace DungeonsAndPawns
                 }
                 catch (Exception ex) { Warn(file, ex); }
             }
-            // Ensure sensible defaults for zero values
             foreach (var r in list)
             {
+                if (string.IsNullOrEmpty(r.id)) r.id = "standard"; // FIX: guard against blank id from a malformed file
                 if (r.checkDiceSides   == 0) r.checkDiceSides   = 20;
                 if (r.maxPlayers       == 0) r.maxPlayers        = 4;
                 if (r.baseXpPerLevel   == 0) r.baseXpPerLevel    = 100;
@@ -274,7 +322,6 @@ namespace DungeonsAndPawns
                     var root = JSON.Parse(File.ReadAllText(file));
                     if (root == null) continue;
 
-                    // Support both single object and array in one file
                     if (root.IsArray)
                     {
                         foreach (JSONNode n in root.AsArray)
@@ -356,8 +403,6 @@ namespace DungeonsAndPawns
             }
             return list;
         }
-
-        // ── Serializers (for in-game editor save) ─────────────
 
         public static void SaveRuleset(DNP_RulesetData r)
         {
@@ -472,8 +517,6 @@ namespace DungeonsAndPawns
         public static void DeleteItem    (DNP_ItemData      i) => TryDelete(Path.Combine(Items,     i.id + ".json"));
         public static void DeleteScenario(DNP_ScenarioData  s) => TryDelete(Path.Combine(Scenarios, s.id + ".json"));
 
-        // ── Folder helpers ─────────────────────────────────────
-
         private static void EnsureFolders()
         {
             foreach (var p in new[] { Root, Rulesets, Enemies, Items, Scenarios })
@@ -482,7 +525,6 @@ namespace DungeonsAndPawns
 
         private static void CopyDefaults()
         {
-            // Try case-insensitive PackageId match first, then folder name
             string modFolder = null;
             var mod = LoadedModManager.RunningMods.FirstOrDefault(m =>
                 string.Equals(m.PackageId, "CarlosNahuelcoy.DungeonsAndPawns",
@@ -518,7 +560,7 @@ namespace DungeonsAndPawns
                     + " — will use embedded defaults for this category.");
                 return;
             }
-            if (Directory.GetFiles(dest, "*.json").Length > 0) return; // already has content
+            if (Directory.GetFiles(dest, "*.json").Length > 0) return;
 
             int count = 0;
             foreach (var file in Directory.GetFiles(src, "*.json"))
@@ -531,14 +573,12 @@ namespace DungeonsAndPawns
 
         private static void WriteEmbeddedDefaults()
         {
-            // Only write if folders are empty — never overwrite user changes
             if (!Directory.GetFiles(Rulesets,  "*.json").Any()) SaveRuleset(EmbeddedStandard());
             if (!Directory.GetFiles(Rulesets,  "*.json").Skip(1).Any()) SaveRuleset(EmbeddedGrim());
             if (!Directory.GetFiles(Enemies,   "*.json").Any()) { SaveEnemy(EmbeddedGoblin()); SaveEnemy(EmbeddedOrc()); SaveEnemy(EmbeddedDarkMage()); }
             if (!Directory.GetFiles(Items,     "*.json").Any()) foreach (var i in EmbeddedItems()) SaveItem(i);
             if (!Directory.GetFiles(Scenarios, "*.json").Any()) SaveScenario(EmbeddedGoblinWarren());
 
-            // Save both language versions of the default world
             if (!Directory.GetFiles(Worlds, "*.json").Any())
             {
                 SaveWorldFile(EmbeddedDefaultWorldEN(), "world_dnd_default");
@@ -553,24 +593,18 @@ namespace DungeonsAndPawns
             Log.Message("[DungeonsAndPawns] Created default world: " + path);
         }
 
-        // ── Default world loader ──────────────────────────────
-        // If no world is active on the GameComponent, load the default D&D world.
-
         public static void LoadDefaultWorld()
         {
             var comp = DNP_GameComponent.Instance;
             if (comp == null) return;
 
-            // Already has a world with content — don't overwrite
             if (comp.World != null &&
                 !string.IsNullOrEmpty(comp.World.worldName) &&
                 comp.World.worldName != "Unnamed World") return;
 
-            // Pick language-appropriate default world
             string lang      = (Prefs.LangFolderName ?? "English").ToLowerInvariant();
             bool   isSpanish = lang.Contains("spanish");
 
-            // Try language-specific file first, then generic, then any
             string[] candidates = isSpanish
                 ? new[] { "world_dnd_default_es.json", "world_dnd_default.json" }
                 : new[] { "world_dnd_default.json", "world_dnd_default_es.json" };
@@ -582,7 +616,6 @@ namespace DungeonsAndPawns
                 if (File.Exists(p)) { worldPath = p; break; }
             }
 
-            // Fallback to any world file
             if (worldPath == null)
             {
                 worldPath = Directory.GetFiles(Worlds, "*.json").FirstOrDefault();
@@ -681,8 +714,6 @@ namespace DungeonsAndPawns
 
         private static void Warn(string file, Exception ex) =>
             Log.Error("[DungeonsAndPawns] Error loading " + file + ": " + ex.Message);
-
-        // ── Embedded fallback defaults ─────────────────────────
 
         private static DNP_RulesetData EmbeddedStandard() => new DNP_RulesetData
         {

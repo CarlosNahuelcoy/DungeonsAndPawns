@@ -483,4 +483,19 @@
   <DNP.Log.SpeakerDMAssist>Narrador</DNP.Log.SpeakerDMAssist>
 <DNP.Log.SpeakerDMPlayer>DM (tú)</DNP.Log.SpeakerDMPlayer>
 <DNP.Log.Thinking>{0} está pensando...</DNP.Log.Thinking>
+
+  <!-- Diálogo de configuración — nuevos mensajes de error -->
+  <DNP.Setup.NoRulesetError>No se pudo iniciar la sesión: no hay ningún reglamento cargado. Intenta reiniciar RimWorld, o reporta esto en el Discord/GitHub del mod junto con tu archivo de log.</DNP.Setup.NoRulesetError>
+  <DNP.Setup.SessionStartFailed>No se pudo iniciar la sesión. Revisa el log (Opciones &gt; Logs, o presiona F12) para más detalles, y considera reportarlo en el Discord/GitHub del mod.</DNP.Setup.SessionStartFailed>
+ 
+  <!-- Ajustes — nombres de proveedor / etiquetas de endpoint que estaban sin traducir -->
+  <DNP.Settings.CustomProviderLabel>Personalizado</DNP.Settings.CustomProviderLabel>
+  <DNP.Settings.EndpointLabel>Endpoint:</DNP.Settings.EndpointLabel>
+  <DNP.Settings.ParseErrorLabel>Error de análisis:</DNP.Settings.ParseErrorLabel>
+ 
+  <!-- Ajustes — ejemplos de endpoints personalizados (nombres de servidor sin traducir) -->
+  <DNP.Settings.ExampleLMStudio>  LMStudio:  http://localhost:1234/v1/chat/completions</DNP.Settings.ExampleLMStudio>
+  <DNP.Settings.ExampleOllama>  Ollama:    http://localhost:11434/v1/chat/completions</DNP.Settings.ExampleOllama>
+  <DNP.Settings.ExampleGroq>  Groq:      https://api.groq.com/openai/v1/chat/completions</DNP.Settings.ExampleGroq>
+ 
 </LanguageData>

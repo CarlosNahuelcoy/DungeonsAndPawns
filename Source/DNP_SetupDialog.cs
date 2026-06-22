@@ -24,6 +24,7 @@ namespace DungeonsAndPawns
         private List<string>  worldFiles    = new List<string>();
         private Vector2       worldScroll;
         private Vector2       classScroll;
+        private Vector2       colonistScroll; // FIX: was missing entirely — list had no scroll
 
         // Bigger window to give everything room to breathe
         public override Vector2 InitialSize => new Vector2(980f, 700f);
@@ -108,14 +109,28 @@ namespace DungeonsAndPawns
             const float BTN_H       = 28f;
             const float GAP         = 6f;
 
+            // ── FIX: wrap the colonist list in a scroll view. ──
+            // Previously cards were drawn directly into `inner` with no
+            // BeginScrollView/EndScrollView pair, so once the colonist count
+            // exceeded what fit in the panel height, the rest were simply
+            // drawn off-screen and unreachable — there was no way to select
+            // them. This was reported by a user with more colonists than fit.
+            float listH    = inner.yMax - y;
+            float contentH = allColonists.Count * (CARD_H + GAP);
+
+            var listRect = new Rect(inner.x, y, inner.width, listH);
+            var viewRect = new Rect(0, 0, inner.width - 16f, Mathf.Max(contentH, listH));
+            Widgets.BeginScrollView(listRect, ref colonistScroll, viewRect);
+
+            float vy = 0f;
             foreach (var pawn in allColonists)
             {
                 bool isPlayer = selectedPlayers.Contains(pawn);
                 bool isDM     = !playerIsDM && selectedDM == pawn;
                 bool isFocus  = focusedPawn == pawn;
 
-                // Card rect (absolute)
-                var card = new Rect(inner.x, y, inner.width, CARD_H);
+                // Card rect — now relative to the scroll view, not the panel
+                var card = new Rect(0, vy, viewRect.width, CARD_H);
 
                 // Background
                 Color bg = isFocus  ? new Color(0.28f, 0.23f, 0.10f)
@@ -126,25 +141,25 @@ namespace DungeonsAndPawns
 
                 // How many buttons on the right?
                 float totalBtnW = !playerIsDM ? BTN_W * 2f + 6f : BTN_W;
-                float textW     = inner.width - TEXT_X - totalBtnW - 14f;
+                float textW     = viewRect.width - TEXT_X - totalBtnW - 14f;
 
                 // Click zone (left part of card)
-                if (Widgets.ButtonInvisible(new Rect(inner.x, y, inner.width - totalBtnW - 14f, CARD_H)))
+                if (Widgets.ButtonInvisible(new Rect(0, vy, viewRect.width - totalBtnW - 14f, CARD_H)))
                     focusedPawn = isFocus ? null : pawn;
 
                 // Portrait
-                Widgets.ThingIcon(new Rect(inner.x + PORTRAIT_X, y + (CARD_H - PORTRAIT_S) / 2f,
+                Widgets.ThingIcon(new Rect(PORTRAIT_X, vy + (CARD_H - PORTRAIT_S) / 2f,
                     PORTRAIT_S, PORTRAIT_S), pawn);
 
                 // Name — upper third
                 Text.Font = GameFont.Small;
-                Widgets.Label(new Rect(inner.x + TEXT_X, y + 14f, textW, 22f),
+                Widgets.Label(new Rect(TEXT_X, vy + 14f, textW, 22f),
                     pawn.Name.ToStringShort);
 
                 // Class hint — below name
                 Text.Font = GameFont.Tiny;
                 GUI.color = isPlayer ? new Color(0.5f, 0.9f, 0.5f) : Color.gray;
-                Widgets.Label(new Rect(inner.x + TEXT_X, y + 40f, textW, 18f),
+                Widgets.Label(new Rect(TEXT_X, vy + 40f, textW, 18f),
                     GetAssignedClassName(pawn));
 
                 // Health if hurt
@@ -152,16 +167,16 @@ namespace DungeonsAndPawns
                 if (healthPct < 0.99f)
                 {
                     GUI.color = healthPct < 0.5f ? Color.red : new Color(1f, 0.7f, 0.2f);
-                    Widgets.Label(new Rect(inner.x + TEXT_X, y + 58f, textW, 16f),
+                    Widgets.Label(new Rect(TEXT_X, vy + 58f, textW, 16f),
                         Mathf.RoundToInt(healthPct * 100f) + "% HP");
                 }
                 GUI.color = Color.white;
 
                 // Buttons — right side, vertically centered
-                float btnTop = y + (CARD_H - BTN_H) / 2f;
+                float btnTop = vy + (CARD_H - BTN_H) / 2f;
 
                 // P button
-                float pBtnX = inner.xMax - BTN_W - 4f;
+                float pBtnX = viewRect.width - BTN_W - 4f;
                 if (!playerIsDM) pBtnX -= BTN_W + 6f;
 
                 GUI.color = isPlayer ? new Color(0.3f, 0.78f, 0.3f) : new Color(0.5f, 0.5f, 0.5f);
@@ -177,7 +192,7 @@ namespace DungeonsAndPawns
                 if (!playerIsDM)
                 {
                     GUI.color = isDM ? new Color(0.85f, 0.62f, 0.15f) : new Color(0.5f, 0.5f, 0.5f);
-                    if (Widgets.ButtonText(new Rect(inner.xMax - BTN_W - 4f, btnTop, BTN_W, BTN_H),
+                    if (Widgets.ButtonText(new Rect(viewRect.width - BTN_W - 4f, btnTop, BTN_W, BTN_H),
                         isDM ? "✓DM" : "DM"))
                     {
                         selectedDM = isDM ? null : pawn;
@@ -187,8 +202,10 @@ namespace DungeonsAndPawns
                     GUI.color = Color.white;
                 }
 
-                y += CARD_H + GAP;
+                vy += CARD_H + GAP;
             }
+
+            Widgets.EndScrollView();
         }
 
         private string GetAssignedClassName(Pawn pawn)
@@ -586,19 +603,7 @@ namespace DungeonsAndPawns
 
             if (Widgets.ButtonText(rect, "DNP.Setup.BeginSession".Translate()) && canStart)
             {
-                if (selectedWorld != null && DNP_GameComponent.Instance != null)
-                    DNP_GameComponent.Instance.World = selectedWorld;
-
-                string rulesetId = DNP_ContentRegistry.FirstRuleset?.id ?? "standard";
-
-                DNP_SessionManager.StartSession(
-                    selectedPlayers, playerIsDM, selectedDM,
-                    rulesetId, null, classAssignments, playerCharPawn);
-
-                Close();
-                var session = DNP_SessionManager.ActiveSession;
-                if (session != null)
-                    Find.WindowStack.Add(new DNP_SessionWindow(session));
+                TryStartSession();
             }
 
             GUI.color = Color.white;
@@ -610,6 +615,57 @@ namespace DungeonsAndPawns
                     ? "DNP.Setup.NeedPlayer".Translate()
                     : "DNP.Setup.NeedDM".Translate();
                 Widgets.Label(new Rect(rect.x, rect.y - 20f, rect.width, 18f), reason);
+            }
+        }
+
+        // ── FIX: "Begin Session" doing nothing ─────────────────
+        // The previous version called StartSession directly inside the button
+        // click with no try/catch. If StartSession (or anything it calls —
+        // BuildCharacter, class lookup, world assignment, etc.) threw an
+        // exception, RimWorld's UI loop would swallow it: no crash, no log
+        // message visible to the player, and the window just... did nothing.
+        // That matches exactly what was reported. Wrapping this in a try/catch
+        // and logging + messaging on failure turns a silent dead-end into a
+        // visible, debuggable error.
+        private void TryStartSession()
+        {
+            try
+            {
+                if (DNP_ContentRegistry.FirstRuleset == null)
+                {
+                    Log.Error("[DungeonsAndPawns] Cannot start session — no ruleset loaded. "
+                        + "Content may have failed to initialize.");
+                    Messages.Message("DNP.Setup.NoRulesetError".Translate(),
+                        MessageTypeDefOf.RejectInput, false);
+                    return;
+                }
+
+                if (selectedWorld != null && DNP_GameComponent.Instance != null)
+                    DNP_GameComponent.Instance.World = selectedWorld;
+
+                string rulesetId = DNP_ContentRegistry.FirstRuleset.id;
+
+                DNP_SessionManager.StartSession(
+                    selectedPlayers, playerIsDM, selectedDM,
+                    rulesetId, null, classAssignments, playerCharPawn);
+
+                var session = DNP_SessionManager.ActiveSession;
+                if (session == null)
+                {
+                    Log.Error("[DungeonsAndPawns] StartSession completed but ActiveSession is null.");
+                    Messages.Message("DNP.Setup.SessionStartFailed".Translate(),
+                        MessageTypeDefOf.RejectInput, false);
+                    return;
+                }
+
+                Close();
+                Find.WindowStack.Add(new DNP_SessionWindow(session));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Error("[DungeonsAndPawns] Failed to start session: " + ex);
+                Messages.Message("DNP.Setup.SessionStartFailed".Translate(),
+                    MessageTypeDefOf.RejectInput, false);
             }
         }
     }

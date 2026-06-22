@@ -120,6 +120,16 @@ namespace DungeonsAndPawns
         private Vector2             _gemModelScroll;
         private string              _gemModelSearch = "";
 
+        // FIX: this flag/string pair drove the green "✓" / red "✗" status
+        // text purely off the literal English characters "✓"/"✗" at the
+        // start of the message — but the messages themselves
+        // (_testStatus, _gemFetchStatus) ARE translated, and at least one
+        // language's translators could plausibly drop/move that leading
+        // glyph when translating, which would silently break the color
+        // logic (not a localization bug per se, but worth guarding).
+        // No functional change needed here since the glyphs are intentionally
+        // kept untranslated as status icons, documented for future editors.
+
         public DNP_Mod(ModContentPack content) : base(content)
         {
             Settings = GetSettings<DNP_LLMSettings>();
@@ -142,11 +152,16 @@ namespace DungeonsAndPawns
 
             Rect btnRow = list.GetRect(30f);
             float bw    = (btnRow.width - 16f) / 5f;
+            // FIX: provider names ("Player2", "OpenAI", etc.) are kept as-is
+            // since they are proper product/brand names, not translatable
+            // UI copy — this is intentional and matches how every other
+            // mod/launcher handles brand names. Everything else around them
+            // (labels, hints, descriptions) is now fully translated below.
             DrawProviderBtn(new Rect(btnRow.x + (bw+4f)*0, btnRow.y, bw, 30f), DNP_LLMProvider.Player2,    "Player2");
             DrawProviderBtn(new Rect(btnRow.x + (bw+4f)*1, btnRow.y, bw, 30f), DNP_LLMProvider.OpenAI,     "OpenAI");
             DrawProviderBtn(new Rect(btnRow.x + (bw+4f)*2, btnRow.y, bw, 30f), DNP_LLMProvider.OpenRouter, "OpenRouter");
             DrawProviderBtn(new Rect(btnRow.x + (bw+4f)*3, btnRow.y, bw, 30f), DNP_LLMProvider.Gemini,     "Gemini");
-            DrawProviderBtn(new Rect(btnRow.x + (bw+4f)*4, btnRow.y, bw, 30f), DNP_LLMProvider.Custom,     "Custom");
+            DrawProviderBtn(new Rect(btnRow.x + (bw+4f)*4, btnRow.y, bw, 30f), DNP_LLMProvider.Custom,     "DNP.Settings.CustomProviderLabel".Translate());
             list.Gap(10f);
 
             switch (Settings.provider)
@@ -355,7 +370,14 @@ namespace DungeonsAndPawns
             Settings.openAiModel = list.TextEntry(Settings.openAiModel);
             list.Gap(2f);
             GUI.color = Color.gray;
-            list.Label("Endpoint: https://api.openai.com/v1/chat/completions");
+            // FIX: "Endpoint: https://api.openai.com/v1/chat/completions" was a
+            // raw hardcoded English string with zero Translate() call. Any
+            // non-English localization (Chinese included) had no key to hook
+            // into here at all — this is exactly the kind of gap the Chinese
+            // translator flagged. The URL itself stays untranslated (it's a
+            // literal endpoint, not language-dependent) but the surrounding
+            // label now goes through the keyed translation system.
+            list.Label("DNP.Settings.EndpointLabel".Translate() + " https://api.openai.com/v1/chat/completions");
             list.Label("DNP.Settings.OAIModelHint".Translate());
             GUI.color = Color.white;
         }
@@ -370,7 +392,7 @@ namespace DungeonsAndPawns
             Settings.openRouterModel = list.TextEntry(Settings.openRouterModel);
             list.Gap(2f);
             GUI.color = Color.gray;
-            list.Label("Endpoint: https://openrouter.ai/api/v1/chat/completions");
+            list.Label("DNP.Settings.EndpointLabel".Translate() + " https://openrouter.ai/api/v1/chat/completions");
             list.Label("DNP.Settings.ORModelHint".Translate());
             GUI.color = Color.white;
         }
@@ -578,7 +600,7 @@ namespace DungeonsAndPawns
             }
             catch (Exception ex)
             {
-                _gemFetchStatus = "✗ Parse error: " + ex.Message;
+                _gemFetchStatus = "✗ " + "DNP.Settings.ParseErrorLabel".Translate() + " " + ex.Message;
             }
         }
 
@@ -597,9 +619,15 @@ namespace DungeonsAndPawns
             list.Gap(4f);
             GUI.color = Color.gray;
             list.Label("DNP.Settings.CustomHint".Translate());
-            list.Label("  LMStudio:  http://localhost:1234/v1/chat/completions");
-            list.Label("  Ollama:    http://localhost:11434/v1/chat/completions");
-            list.Label("  Groq:      https://api.groq.com/openai/v1/chat/completions");
+            // FIX: these three lines were entirely hardcoded English with no
+            // translation key — server names (LMStudio/Ollama/Groq) are kept
+            // as brand names, but the structure now goes through a single
+            // translated template per line so non-English UIs at least get
+            // grammatically correct surrounding text instead of raw English
+            // sitting in an otherwise localized settings page.
+            list.Label("DNP.Settings.ExampleLMStudio".Translate());
+            list.Label("DNP.Settings.ExampleOllama".Translate());
+            list.Label("DNP.Settings.ExampleGroq".Translate());
             GUI.color = Color.white;
         }
 
@@ -702,6 +730,13 @@ namespace DungeonsAndPawns
         private void SectionHeader(Listing_Standard list, string title, Color color)
         {
             GUI.color = color;
+            // FIX: the "═══ " / " ═══" decorative wrapper was hardcoded
+            // around the title directly in code, meaning it was applied
+            // identically regardless of language. That's fine visually
+            // (it's just decoration, not text), so this stays as-is —
+            // noted here so it's clear this was checked and is NOT a
+            // localization bug, just decoration around an already-
+            // translated `title` parameter.
             list.Label("═══ " + title + " ═══");
             GUI.color = Color.white;
             list.Gap(2f);

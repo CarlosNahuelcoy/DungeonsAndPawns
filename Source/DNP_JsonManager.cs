@@ -334,7 +334,24 @@ namespace DungeonsAndPawns
         public static void ExportWorld(DNP_WorldData world)
         {
             EnsureFolders();
+
+            // FIX: previously the filename included a timestamp
+            // (yyyyMMdd_HHmm), so calling ExportWorld twice for the SAME
+            // world — e.g. opening the editor, making no changes, and
+            // closing it — created a brand new file each time instead of
+            // overwriting the existing one. That's exactly what produced
+            // duplicate "Las Tierras Olvidadas" entries in the world list.
+            //
+            // Worlds now get a stable id the first time they're saved
+            // (based on the sanitized name, with NO timestamp), and that
+            // id is reused on every subsequent save so the same world
+            // always writes to the same file, regardless of how many times
+            // the editor is opened and closed.
+            if (string.IsNullOrEmpty(world.id))
+                world.id = SanitizeFilename(world.worldName);
+
             var node = new JSONObject();
+            node["id"]                = world.id;
             node["worldName"]         = world.worldName;
             node["genre"]             = world.genre;
             node["tone"]              = world.tone;
@@ -348,9 +365,9 @@ namespace DungeonsAndPawns
             node["campaignObjective"] = world.campaignObjective;
             // campaignNotes intentionally excluded — private DM notes stay local
 
-            string filename = "world_" + SanitizeFilename(world.worldName)
-                              + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json";
+            string filename = "world_" + world.id + ".json";
             string path = Path.Combine(WorldFolder, filename);
+
             WriteJson(path, node);
             Messages.Message("DNP.Export.WorldExported".Translate(path),
                 MessageTypeDefOf.TaskCompletion, false);
@@ -368,8 +385,21 @@ namespace DungeonsAndPawns
                 return null;
             }
 
+            // FIX: fall back to deriving the id from the filename for any
+            // world files saved before this fix (no "id" field present yet
+            // in older JSON files), so existing worlds keep loading
+            // correctly and get a proper stable id from here on once
+            // re-saved through the editor.
+            string id = node["id"];
+            if (string.IsNullOrEmpty(id))
+            {
+                string fname = Path.GetFileNameWithoutExtension(path);
+                id = fname.StartsWith("world_") ? fname.Substring(6) : fname;
+            }
+
             return new DNP_WorldData
             {
+                id                = id,
                 worldName         = node["worldName"],
                 genre             = node["genre"],
                 tone              = node["tone"],

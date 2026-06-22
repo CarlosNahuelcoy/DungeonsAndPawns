@@ -473,4 +473,19 @@
   <DNP.Log.SpeakerDMAssist>Narrator</DNP.Log.SpeakerDMAssist>
 <DNP.Log.SpeakerDMPlayer>DM (you)</DNP.Log.SpeakerDMPlayer>
 <DNP.Log.Thinking>{0} is thinking...</DNP.Log.Thinking>
+
+  <!-- Setup dialog — new error messages -->
+  <DNP.Setup.NoRulesetError>Could not start session: no ruleset is loaded. Try restarting RimWorld, or report this on the mod's Discord/GitHub with your log file.</DNP.Setup.NoRulesetError>
+  <DNP.Setup.SessionStartFailed>Failed to start the session. Check the log (Options &gt; Logs, or press F12) for details, and consider reporting this on the mod's Discord/GitHub.</DNP.Setup.SessionStartFailed>
+ 
+  <!-- Settings — provider names / endpoint labels that were hardcoded -->
+  <DNP.Settings.CustomProviderLabel>Custom</DNP.Settings.CustomProviderLabel>
+  <DNP.Settings.EndpointLabel>Endpoint:</DNP.Settings.EndpointLabel>
+  <DNP.Settings.ParseErrorLabel>Parse error:</DNP.Settings.ParseErrorLabel>
+ 
+  <!-- Settings — custom provider example endpoints (server names kept as brand names) -->
+  <DNP.Settings.ExampleLMStudio>  LMStudio:  http://localhost:1234/v1/chat/completions</DNP.Settings.ExampleLMStudio>
+  <DNP.Settings.ExampleOllama>  Ollama:    http://localhost:11434/v1/chat/completions</DNP.Settings.ExampleOllama>
+  <DNP.Settings.ExampleGroq>  Groq:      https://api.groq.com/openai/v1/chat/completions</DNP.Settings.ExampleGroq>
+ 
 </LanguageData>

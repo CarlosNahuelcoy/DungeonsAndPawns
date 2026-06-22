@@ -10,6 +10,16 @@ namespace DungeonsAndPawns
     // ─────────────────────────────────────────────────────────────
     public class DNP_WorldData : IExposable
     {
+        // FIX: stable identifier used for the JSON filename on disk.
+        // Previously ExportWorld() built the filename from worldName +
+        // a timestamp, so saving the same world twice created two
+        // different files instead of overwriting one — this is what
+        // caused duplicate world entries in the sidebar/picker. The id
+        // is assigned once (the first time a world is exported) and
+        // reused forever after, completely independent of worldName,
+        // so renaming a world no longer creates a new file either.
+        public string id = "";
+
         public string worldName    = "Unnamed World";
         public string genre        = "";   // "medieval fantasy", "sci-fi", "post-apocalyptic"...
         public string tone         = "";   // "grim", "heroic", "dark humor", "survival"...
@@ -27,6 +37,12 @@ namespace DungeonsAndPawns
 
         public void ExposeData()
         {
+            // FIX: id must be persisted with the save file too — otherwise
+            // a world saved during play, then saved/loaded with the game,
+            // would lose its id on reload and ExportWorld would treat it
+            // as "new" again the next time the editor saves it, recreating
+            // the exact duplicate-file problem this field exists to fix.
+            Scribe_Values.Look(ref id,                "id",               "");
             Scribe_Values.Look(ref worldName,        "worldName",        "Unnamed World");
             Scribe_Values.Look(ref genre,            "genre",            "");
             Scribe_Values.Look(ref tone,             "tone",             "");
